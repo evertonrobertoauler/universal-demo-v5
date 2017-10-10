@@ -1,4 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -8,7 +9,9 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule.withServerTransition({ appId: 'universal-demo-v5' }),
+    HttpClientModule,
+    BrowserTransferStateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
