@@ -12,7 +12,9 @@ module.exports = {
     }
   },
   target: 'node',
-  externals: [nodeExternals()],
+  externals: [nodeExternals({
+    whitelist: [/ngx-bootstrap/]
+  })],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js'
