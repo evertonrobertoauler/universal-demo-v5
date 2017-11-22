@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { CookiesService } from './cookies.service';
 
 const DOGS_KEY = makeStateKey('dogs');
 
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private state: TransferState
+    private state: TransferState,
+    private cookies: CookiesService
   ) { }
 
   ngOnInit() {
@@ -30,6 +32,10 @@ export class AppComponent implements OnInit {
           this.dogs = data;
           this.state.set(DOGS_KEY, data as any);
         });
+    } else if (!this.cookies.getCookie('auth')) {
+      this.cookies.setCookie('auth', 'myauthtoken');
     }
+
+    console.log(this.cookies.getCookie('auth'));
   }
 }

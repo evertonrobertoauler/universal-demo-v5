@@ -20,7 +20,13 @@ const template = readFileSync(join(DIST_FOLDER, 'browser', 'index.html')).toStri
 const { AppServerModuleNgFactory } = require('main.server');
 
 app.engine('html', (_, options, callback) => {
-  const opts = { document: template, url: options.req.url };
+  const opts = {
+    document: template,
+    url: options.req.url,
+    extraProviders: [
+      { provide: 'request', useValue: options.req }
+    ]
+  };
 
   renderModuleFactory(AppServerModuleNgFactory, opts)
     .then(html => callback(null, html));

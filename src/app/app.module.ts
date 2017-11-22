@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { CookiesService } from './cookies.service';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     BrowserTransferStateModule
   ],
-  providers: [],
+  providers: [CookiesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
