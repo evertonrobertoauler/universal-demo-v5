@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { TransferState, makeStateKey, Title, Meta } from '@angular/platform-browser';
 
 const DOGS_KEY = makeStateKey('dogs');
 
@@ -17,7 +17,9 @@ export class AppComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private state: TransferState
+    private state: TransferState,
+    private titleService: Title,
+    private metaService: Meta
   ) { }
 
   ngOnInit() {
@@ -31,5 +33,8 @@ export class AppComponent implements OnInit {
           this.state.set(DOGS_KEY, data as any);
         });
     }
+
+    this.titleService.setTitle('My server side rendered title!');
+    this.metaService.addTag({name: 'description', content: 'My server side rendered description'});
   }
 }
